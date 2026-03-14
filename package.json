@@ -1,5 +1,5 @@
 {
-  "name": "qr-attendance-sms",
+  "name": "qr-attendance-system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "html5-qrcode": "^2.3.8",
+    "lucide-react": "^0.577.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
