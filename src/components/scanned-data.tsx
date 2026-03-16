@@ -1,7 +1,22 @@
 import { Loader2, Send, XCircle } from "lucide-react";
 
-const ScanedData = ({ data, handleClick, loading }) => {
-  const dataEntries = Object.entries(data);
+type ScanedDataProps = {
+  data: Record<string, unknown>;
+  handleClick: () => void;
+  handleRescan: () => void;
+  loading: boolean;
+};
+
+const formatLabel = (key: string) =>
+  key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+
+const ScanedData = ({
+  data,
+  handleClick,
+  handleRescan,
+  loading,
+}: ScanedDataProps) => {
+  const dataEntries = Object.entries(data ?? {});
 
   return (
     <div className="w-full flex flex-col items-center gap-6 animate-in fade-in zoom-in duration-300">
@@ -16,12 +31,14 @@ const ScanedData = ({ data, handleClick, loading }) => {
         {dataEntries.map(([key, value]) => (
           <div
             key={key}
-            className="flex justify-between items-center border-b border-gray-800 pb-2 last:border-0 last:pb-0"
+            className="flex justify-between items-center gap-4 border-b border-gray-800 pb-2 last:border-0 last:pb-0"
           >
             <span className="text-gray-500 text-xs uppercase tracking-wider font-semibold">
-              {key.replace("_", " ")}
+              {formatLabel(key)}
             </span>
-            <span className="text-blue-400 font-medium">{String(value)}</span>
+            <span className="text-blue-400 font-medium text-right break-all">
+              {String(value)}
+            </span>
           </div>
         ))}
       </div>
@@ -47,7 +64,7 @@ const ScanedData = ({ data, handleClick, loading }) => {
 
         {!loading && (
           <button
-            onClick={() => window.location.reload()}
+            onClick={handleRescan}
             className="flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-colors py-2 text-sm"
           >
             <XCircle className="h-4 w-4" />
